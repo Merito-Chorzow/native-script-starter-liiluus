@@ -1,0 +1,33 @@
+<ActionBar title="Dodaj produkt" class="action-bar">
+  <NavigationButton text="Wstecz"></NavigationButton>
+</ActionBar>
+
+<ScrollView>
+  <StackLayout padding="20" class="page-content">
+    <StackLayout class="form-container">
+      <Label text="Nazwa produktu *" class="form-label text-muted m-b-5"></Label>
+      <TextField hint="Wprowadź nazwę produktu" [(ngModel)]="name" class="form-input m-b-15"></TextField>
+
+      <Label text="Kod produktu *" class="form-label text-muted m-b-5"></Label>
+      <TextField hint="Wprowadź kod produktu" [(ngModel)]="code" class="form-input m-b-15"></TextField>
+
+      <Label text="Status" class="form-label text-muted m-b-5"></Label>
+      <TextField hint="Wprowadź status (opcjonalnie)" [(ngModel)]="status" class="form-input m-b-20"></TextField>
+
+      <Button text="📷 Zrób zdjęcie" (tap)="takePhoto()" class="btn btn-secondary m-b-15"></Button>
+      <Image *ngIf="photoPath" [src]="photoPath" width="300" height="200" class="product-image m-b-20" stretch="aspectFit"></Image>
+      <Label *ngIf="photo && !photoPath" text="Zdjęcie załadowane" class="text-muted m-b-20"></Label>
+
+      <Label text="* Pola wymagane" class="text-muted text-small m-b-20"></Label>
+
+      <Button
+        [isEnabled]="!isSaving"
+        text="💾 Zapisz produkt"
+        class="btn btn-primary m-b-10"
+        (tap)="addProduct()"
+      ></Button>
+
+      <Button text="Wróć do listy" [nsRouterLink]="['/products']" class="btn btn-secondary"></Button>
+    </StackLayout>
+  </StackLayout>
+</ScrollView>

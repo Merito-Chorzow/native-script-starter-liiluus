@@ -1,0 +1,28 @@
+<ActionBar title="Lista produktów" class="action-bar"></ActionBar>
+
+<StackLayout padding="20" class="page-content">
+  <StackLayout orientation="horizontal" class="m-b-10">
+    <Button text="➕ Dodaj produkt" [nsRouterLink]="['/add']" class="btn btn-primary flex-grow"></Button>
+    <Button text="🔄 Odśwież" (tap)="loadProducts()" [isEnabled]="!isLoading" class="btn btn-secondary m-l-10"></Button>
+  </StackLayout>
+  <Button text="⚙️ Ustawienia" (tap)="navigateToSettings()" class="btn btn-secondary m-b-20"></Button>
+  
+  <Label *ngIf="isLoading" text="Ładowanie..." class="h3 text-center"></Label>
+
+  <Label *ngIf="errorMessage" [text]="errorMessage" class="text-danger text-center m-b-20"></Label>
+
+  <Label *ngIf="!isLoading && !errorMessage && products.length === 0" text="Brak produktów. Dodaj pierwszy produkt!" class="h3 text-center text-muted"></Label>
+
+  <ListView *ngIf="!isLoading" [items]="products" class="product-list">
+    <ng-template let-item="item">
+      <GridLayout columns="*, auto" class="product-item p-15 m-b-10" (tap)="navigateToProduct(item)">
+        <StackLayout col="0">
+          <Label [text]="item.name" class="product-name h2 m-b-5"></Label>
+          <Label [text]="'Kod: ' + item.code" class="product-code text-muted m-b-3"></Label>
+          <Label [text]="'Status: ' + (item.status || 'brak')" class="product-status"></Label>
+        </StackLayout>
+        <Label col="1" text="›" class="arrow-icon h2" verticalAlignment="center" *ngIf="item.id"></Label>
+      </GridLayout>
+    </ng-template>
+  </ListView>
+</StackLayout>

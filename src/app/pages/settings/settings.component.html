@@ -1,0 +1,75 @@
+<ActionBar title="Ustawienia" class="action-bar">
+  <NavigationButton text="Wstecz"></NavigationButton>
+</ActionBar>
+
+<ScrollView height="100%">
+  <StackLayout padding="20" class="page-content">
+    <Label text="Ustawienia aplikacji" class="h1 text-center m-b-30"></Label>
+
+    <!-- Connection Settings -->
+    <StackLayout class="settings-section m-b-20">
+      <Label text="Połączenie" class="section-title h2 m-b-15"></Label>
+      
+      <StackLayout class="m-b-15">
+        <Label text="Tryb offline" class="setting-label h3 m-b-5"></Label>
+        <Switch [(checked)]="offlineMode" (checkedChange)="toggleOfflineMode()"></Switch>
+        <Label text="Włącz tryb offline, aby pracować bez połączenia z internetem" class="setting-description text-muted m-t-5"></Label>
+      </StackLayout>
+
+      <StackLayout class="m-b-15">
+        <Label text="URL API" class="setting-label h3 m-b-5"></Label>
+        <TextField [(ngModel)]="apiUrl" hint="Wprowadź URL API" class="form-input m-b-10"></TextField>
+        <Button text="💾 Zapisz URL" (tap)="saveApiUrl()" class="btn btn-primary"></Button>
+        <Label text="Zmiana URL API wymaga restartu aplikacji" class="setting-description text-muted m-t-5"></Label>
+      </StackLayout>
+    </StackLayout>
+
+    <!-- App Preferences -->
+    <StackLayout class="settings-section m-b-20">
+      <Label text="Preferencje aplikacji" class="section-title h2 m-b-15"></Label>
+      
+      <StackLayout class="m-b-15">
+        <Label text="Automatyczne odświeżanie" class="setting-label h3 m-b-5"></Label>
+        <Switch [(checked)]="autoRefresh" (checkedChange)="toggleAutoRefresh()"></Switch>
+        <Label text="Automatycznie odświeżaj listę produktów przy powrocie do widoku" class="setting-description text-muted m-t-5"></Label>
+      </StackLayout>
+
+      <StackLayout class="m-b-15">
+        <Label text="Powiadomienia" class="setting-label h3 m-b-5"></Label>
+        <Switch [(checked)]="showNotifications" (checkedChange)="toggleNotifications()"></Switch>
+        <Label text="Wyświetlaj powiadomienia o akcjach (dodanie, edycja, usunięcie)" class="setting-description text-muted m-t-5"></Label>
+      </StackLayout>
+
+      <StackLayout class="m-b-15">
+        <Label text="Cache produktów" class="setting-label h3 m-b-5"></Label>
+        <Switch [(checked)]="cacheProducts" (checkedChange)="toggleCacheProducts()"></Switch>
+        <Label text="Zapisuj produkty lokalnie dla szybszego dostępu" class="setting-description text-muted m-t-5"></Label>
+      </StackLayout>
+    </StackLayout>
+
+    <!-- Data Management -->
+    <StackLayout class="settings-section m-b-20">
+      <Label text="Zarządzanie danymi" class="section-title h2 m-b-15"></Label>
+      
+      <Button text="🗑️ Wyczyść cache" (tap)="clearCache()" class="btn btn-secondary m-b-10"></Button>
+      <Label text="Usuwa lokalnie zapisane dane produktów" class="setting-description text-muted m-b-15"></Label>
+      
+      <Button text="🔄 Resetuj ustawienia" (tap)="resetToDefaults()" class="btn btn-danger"></Button>
+      <Label text="Przywraca wszystkie ustawienia do wartości domyślnych" class="setting-description text-muted m-t-5"></Label>
+    </StackLayout>
+
+    <!-- App Info -->
+    <StackLayout class="settings-section m-t-30">
+      <Label text="Informacje o aplikacji" class="section-title h2 m-b-15"></Label>
+      <Label text="Scan Inventory" class="app-name h3 m-b-5"></Label>
+      <Label text="Wersja 1.0.0" class="text-muted m-b-5"></Label>
+      <Label text="Aplikacja do zarządzania inwentarzem produktów" class="app-description text-muted m-t-5"></Label>
+      <Label text="Funkcje: skanowanie produktów, synchronizacja z API, tryb offline" class="text-muted m-t-10"></Label>
+    </StackLayout>
+
+    <!-- Navigation -->
+    <StackLayout class="m-t-30">
+      <Button text="← Wróć do listy produktów" (tap)="goBackToProducts()" class="btn btn-primary"></Button>
+    </StackLayout>
+  </StackLayout>
+</ScrollView>
