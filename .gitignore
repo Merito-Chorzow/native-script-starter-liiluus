@@ -26,3 +26,42 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# NativeScript
+/platforms/
+*.apk
+*.aab
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# iOS
+*.xcworkspace
+!default.xcworkspace
+*.xcuserdata
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android
+*.iml
+.gradle/
+local.properties
+*.ap_
+*.apk
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle
+build/
+captures/
+.externalNativeBuild
+.cxx
+local.properties

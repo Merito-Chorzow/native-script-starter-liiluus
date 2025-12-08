@@ -1,0 +1,66 @@
+<ActionBar title="Szczegóły produktu" class="action-bar">
+  <NavigationButton text="Wstecz"></NavigationButton>
+</ActionBar>
+
+<ScrollView>
+  <StackLayout padding="20" class="page-content" *ngIf="!isLoading && product">
+    <!-- View Mode -->
+    <StackLayout *ngIf="!isEditing" class="product-detail-view">
+      <Label [text]="product.name" class="product-title h1 text-center m-b-30"></Label>
+      
+      <StackLayout class="detail-section m-b-20">
+        <Label text="Kod produktu:" class="detail-label text-muted m-b-5"></Label>
+        <Label [text]="product.code" class="detail-value h3"></Label>
+      </StackLayout>
+
+      <StackLayout class="detail-section m-b-20">
+        <Label text="Status:" class="detail-label text-muted m-b-5"></Label>
+        <Label [text]="product.status || 'brak'" class="detail-value h3 status-badge"></Label>
+      </StackLayout>
+
+      <StackLayout class="detail-section m-b-20" *ngIf="product.description">
+        <Label text="Opis:" class="detail-label text-muted m-b-5"></Label>
+        <Label [text]="product.description" class="detail-value h3"></Label>
+      </StackLayout>
+
+      <Image *ngIf="product.photo && product.photo.startsWith('data:')" [src]="product.photo" width="300" height="200" class="product-image m-b-30" stretch="aspectFit"></Image>
+      <Image *ngIf="product.photo && !product.photo.startsWith('data:') && product.photo.length > 0" [src]="'data:image/jpeg;base64,' + product.photo" width="300" height="200" class="product-image m-b-30" stretch="aspectFit"></Image>
+
+      <StackLayout orientation="horizontal" class="action-buttons">
+        <Button text="✏️ Edytuj" (tap)="startEdit()" class="btn btn-primary flex-grow m-r-10"></Button>
+        <Button text="🗑️ Usuń" (tap)="deleteProduct()" [isEnabled]="!isDeleting" class="btn btn-danger flex-grow"></Button>
+      </StackLayout>
+      
+      <Button text="← Wróć do listy" (tap)="goBack()" class="btn btn-secondary m-t-20"></Button>
+    </StackLayout>
+
+    <!-- Edit Mode -->
+    <StackLayout *ngIf="isEditing && editedProduct" class="edit-form">
+      <TextField hint="Nazwa produktu" [(ngModel)]="editedProduct.name" class="form-input m-b-15"></TextField>
+      <TextField hint="Kod produktu" [(ngModel)]="editedProduct.code" class="form-input m-b-15"></TextField>
+      <TextField hint="Status" [(ngModel)]="editedProduct.status" class="form-input m-b-15"></TextField>
+      <TextView hint="Opis" [(ngModel)]="editedProduct.description" class="form-textarea m-b-15" height="100"></TextView>
+
+      <Button text="📷 Zrób zdjęcie" (tap)="takePhoto()" class="btn btn-secondary m-b-15"></Button>
+      <Image *ngIf="editedProduct.photoPath" [src]="editedProduct.photoPath" width="300" height="200" class="product-image m-b-20" stretch="aspectFit"></Image>
+      <Image *ngIf="editedProduct.photo && !editedProduct.photoPath && editedProduct.photo.startsWith('data:')" [src]="editedProduct.photo" width="300" height="200" class="product-image m-b-20" stretch="aspectFit"></Image>
+      <Image *ngIf="editedProduct.photo && !editedProduct.photoPath && !editedProduct.photo.startsWith('data:') && editedProduct.photo.length > 0" [src]="'data:image/jpeg;base64,' + editedProduct.photo" width="300" height="200" class="product-image m-b-20" stretch="aspectFit"></Image>
+
+      <StackLayout orientation="horizontal" class="action-buttons">
+        <Button text="💾 Zapisz" (tap)="saveProduct()" [isEnabled]="!isSaving" class="btn btn-primary flex-grow m-r-10"></Button>
+        <Button text="❌ Anuluj" (tap)="cancelEdit()" [isEnabled]="!isSaving" class="btn btn-secondary flex-grow"></Button>
+      </StackLayout>
+      
+      <Button text="← Wróć do listy" (tap)="goBack()" class="btn btn-secondary m-t-20"></Button>
+    </StackLayout>
+  </StackLayout>
+
+  <StackLayout padding="20" *ngIf="isLoading">
+    <Label text="Ładowanie..." class="h3 text-center"></Label>
+  </StackLayout>
+
+  <StackLayout padding="20" *ngIf="errorMessage">
+    <Label [text]="errorMessage" class="h3 text-center text-danger"></Label>
+    <Button text="Wróć do listy" [nsRouterLink]="['/products']" class="btn btn-primary m-t-20"></Button>
+  </StackLayout>
+</ScrollView>
