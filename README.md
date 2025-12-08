@@ -137,7 +137,11 @@ Domyślnie aplikacja korzysta z prostego API (np. MockAPI/JSON server). Adres mo
 6. Otwórz szczegóły, edytuj lub usuń.
 7. Odłącz internet i spróbuj odświeżyć listę — sprawdź komunikaty o błędzie.
 
-
+## Zrzuty ekranów
+- screen-add.png
+- screen-details.png
+- screen-list.png
+- screen-settings.png
 
 ## Definition of Done (DoD)
 -  3–4 widoki + nawigacja
